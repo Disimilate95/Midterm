@@ -10,10 +10,6 @@ mongoose.connect('mongodb+srv://polosbekovb_db_user:EDdUsj5BJIYr1cLm@cluster0.1e
   .then(() => console.log('Успешно подключено к MongoDB Atlas'))
   .catch(err => console.error('Ошибка подключения к БД:', err));
 
-// ==========================================
-// БОНУС: Получить статистику по статусам
-// ВАЖНО: Этот роут должен быть ДО /tasks/:id
-// ==========================================
 app.get('/tasks/stats', async (req, res) => {
   try {
     const stats = await Task.aggregate([
@@ -39,10 +35,6 @@ app.get('/tasks/stats', async (req, res) => {
   }
 });
 
-// ==========================================
-// УСЛОЖНЕНИЕ: Поиск по title
-// ВАЖНО: Этот роут также должен быть ДО /tasks/:id
-// ==========================================
 app.get('/tasks/search', async (req, res) => {
   try {
     const { q } = req.query;
@@ -57,10 +49,6 @@ app.get('/tasks/search', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-// ==========================================
-// БАЗОВЫЕ ENDPOINTS И СОРТИРОВКА
-// ==========================================
 
 // 1. Создать задачу
 app.post('/tasks', async (req, res) => {
